@@ -505,26 +505,21 @@ public class SistemaBolsaDeTrabajo
         }
     }
     
-    public void eliminarOfertaEmpresa(String idEmpresa, String idOferta)
-    {
-        Empresa empresa = buscarEmpresaPorIdentificador(idEmpresa);
-
-        if (empresa == null)
-        {
-            System.out.println("La empresa no existe");
-            return;
-        }
-
-        boolean eliminada = empresa.eliminarOferta(idOferta);
-
-        if (eliminada)
-        {
-            System.out.println("Oferta eliminada correctamente");
-        }
-        else
-        {
-            System.out.println("La oferta no existe");
-        }
+    public void eliminarOfertaEmpresa(String idEmpresa, String idOferta) throws OfertaNoEncontrada 
+    { 
+        Empresa empresa = buscarEmpresaPorIdentificador(idEmpresa); 
+ 
+        if (empresa != null) 
+        { 
+            OfertaLaboral oferta = empresa.buscarOferta(idOferta); 
+ 
+            if (oferta == null) 
+            { 
+                throw new OfertaNoEncontrada("La oferta laboral no existe."); 
+            } 
+ 
+            empresa.eliminarOferta(idOferta); 
+        } 
     }
     
     public OfertaLaboral buscarOfertaEmpresa(String idEmpresa, String idOferta)

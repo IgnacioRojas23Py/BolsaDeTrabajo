@@ -611,7 +611,15 @@ public class MenuAcceso
     {
         String idOferta = lector.leerString("Ingrese el identificador de la oferta a eliminar: ");
 
-        sistema.eliminarOfertaEmpresa(idEmpresa, idOferta);
+        try
+        {
+            sistema.eliminarOfertaEmpresa(idEmpresa, idOferta);
+            System.out.println("Oferta eliminada correctamente");
+        }
+        catch (OfertaNoEncontrada e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
     
     private void gestionarRequisitosMenu(String idEmpresa)
